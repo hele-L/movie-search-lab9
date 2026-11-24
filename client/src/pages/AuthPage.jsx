@@ -21,6 +21,22 @@ export default function AuthPage({ setLoggedInUser }) {
         // Include headers: { "Content-Type": "application/json" }. 
         // Include credentials: "include". 
         // Show the returned message in setMessage(...). 
+
+        try{
+            const response =  await fetch("http://localhost:3001/api/register",{
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                credentials: "include",
+                body: JSON.stringify({username: registerUsername, password: registerPassword}),
+            });
+
+            const data = await response.json();
+            setMessage(data.message);
+
+        }
+        catch(err){
+            setMessage("Could not reach the server.")
+        }
     }
 
     async function handleLogin(e) {
@@ -33,6 +49,26 @@ export default function AuthPage({ setLoggedInUser }) {
         // 1. setLoggedInUser(data.username) 
         // 2. navigate("/app") 
         // Otherwise show the returned message. 
+        try{
+            const response = await fetch("http://localhost:3001/api/login", { 
+                credentials: "include",
+                method : "POST",
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify({username:loginUsername, password: loginPassword}),
+            });
+                const data = await response.json();
+                if (response.ok){
+                    setLoggedInUser(data.username);
+                    navigate("/app");
+                }
+                else{
+                    setMessage(data.message);
+                }
+                
+        }catch (err){
+            setMessage("Could not reach the server");
+        }
+
     }
 
     return (
