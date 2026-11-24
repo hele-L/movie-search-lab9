@@ -56,7 +56,7 @@ async function readUsers() {
     // Convert the JSON text into a JavaScript value using JSON.parse(...) 
 
     const text = await fs.readFile(usersFile, "utf-8");
-    return json.parse(text);
+    return JSON.parse(text);
 }
 
 // Save the updated users array back to users.json. 
@@ -101,7 +101,7 @@ function isValidPassword(password) {
     // Check that password exists. 
     // Check that it is at least 6 characters long. 
     // Check that it contains at least one letter and one number. 
-    if (typeof password === "string" && password.length > 6 &&
+    if (typeof password === "string" && password.length >= 6 &&
         /[A-Za-z]/.test(password) && /[0-9]/.test(password)
     ){
         return true;
@@ -173,7 +173,7 @@ app.post("/api/register", async (req, res) => {
         // Create an empty watchlist array for the new user. 
         // Save watchlists using writeWatchlists(...). 
         watchlists[username]=[];
-        await writeUsers(watchlists);
+        await writeWatchlists(watchlists);
 
 
         res.status(201).json({ message: "Registration successful." });
@@ -252,7 +252,7 @@ app.get("/api/watchlist", requireLogin, async (req, res) => {
         // Return the watchlist array for this user. 
         // If the user has no watchlist yet, return an empty array. 
         if (!watchlists[username]){
-            return []; 
+            return res.json([]); 
         }
         res.json(watchlists[username]);
 

@@ -1,1 +1,12 @@
-{}
+{
+  "alice": [],
+  "bob": [
+    {
+      "imdbID": "tt0372784",
+      "Title": "Batman",
+      "Year": "2005",
+      "Type": "movie",
+      "Poster": "https://example.com/poster.jpg"
+    }
+  ]
+}

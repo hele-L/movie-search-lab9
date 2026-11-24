@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "username": "alice",
+    "passwordHash": "$2b$10$e9j4NmL7tbOddEX3UI84neT4dx75l3Id/5LroqRrH.fRo7UvHV0di"
+  },
+  {
+    "username": "bob",
+    "passwordHash": "$2b$10$1XDsDRwfwXWD8wmC9Vli7OgZ1M9xix4WelBhPOjIBxxhXPwOoBSd."
+  }
+]
